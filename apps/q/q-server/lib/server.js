@@ -23,6 +23,7 @@ class Queue {
     socket.on('subscribe', (event,cb) => {
       if ( this.events.has(event) ) {
         socket.join(event);
+        console.log(`client ${socket.id} subscribed to ${event} in ${this.name}`);
         cb && cb(undefined, `Subscribed to ${event} in ${this.name} ... ${socket.id}`);
       }
       else {
@@ -37,7 +38,7 @@ class Queue {
   }
 
   static start() {
-    const PORT = process.env.Q_SERVER_PORT || 3333;
+    const PORT = process.env.PORT || 3333;
     Queue.io = new Server(PORT);
     Queue.io.on('connection', socket => {
       socket.on('publish', Queue.publish);
