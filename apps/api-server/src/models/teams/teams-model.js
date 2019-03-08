@@ -9,5 +9,8 @@ const schema = require('./teams-schema.js');
  */
 class Teams extends Model {}
 
+module.exports = Teams;
+
+
 module.exports = new Teams(schema);
 
